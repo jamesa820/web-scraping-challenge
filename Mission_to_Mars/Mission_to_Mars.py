@@ -30,11 +30,12 @@ def scrape_paragraph():
 
     # get news titles and paragraphs
     news_title = soup.find('div',class='content_title').get_text()
-    news_p = soup.find('div', class = 'article_teaser_body')
+    news_p = soup.find('div', class = 'article_teaser_body').get_text()
     
     # Close the browser after scraping
     browser.quit()
    
     return news_title
+    return news_p
 
     if __name__== '__main__': scrape_title()
