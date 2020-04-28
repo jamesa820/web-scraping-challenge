@@ -13,24 +13,22 @@ mongo = PyMongo(app)
 # Route to render index.html template using data from Mongo
 @app.route("/")
 def index():
-    news_articles=mongo.db.news_title.find_one()
+    news_title=mongo.db.news_title.find_one()
     return render_template("index.html", news_title=news_title)
 
 
 # Route that will trigger the scrape function
 @app.route("/scrape")
 def scraper():
-    news_articles = mongo.db.news_title
+    news_title = mongo.db.news_title
+    news_p=mongo.db.news_p
 
 
-    # Run the scrape function
-    #costa_data = scrape_costa.scrape_info()
-
-    # Update the Mongo database using update and upsert=True
-    #mongo.db.collection.update({}, costa_data, upsert=True)
-
+    #  Update the Mongo database using update and upsert=True
+    mongo.db.collection.update({}, news_title, upsert=True)
+    mongo.db.collection.update({}, news_p, upsert=True)
     # Redirect back to home page
-    #return redirect("/")
+    return redirect("/")
 
 
 if __name__ == "__main__":
